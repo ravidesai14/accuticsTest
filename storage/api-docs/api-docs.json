@@ -1,0 +1,216 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Accutics Backend Challenge api documentation",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/accuticsTest/public/api/",
+            "description": "Accutics Backend Challenge api documentation"
+        }
+    ],
+    "paths": {
+        "/campaigns": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "summary": "list of campaigns sort by input type",
+                "description": "list of campaigns sort by input type",
+                "operationId": "d2a1aecdf4c5fee4d3d5f820b5b2a250",
+                "parameters": [
+                    {
+                        "name": "sortByType",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "list of campaigns sort by input type",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaign"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Campaign"
+                ],
+                "summary": "create a campaign",
+                "description": "create a campaign.",
+                "operationId": "a0bb4df932d4174de20c996bfa6f3783",
+                "requestBody": {
+                    "description": "create a campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "inputs": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Input"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "create a campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaign"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "user is required"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Search User by email",
+                "description": "Search User by email",
+                "operationId": "7e2f5799553ec93c9c43e2a58490d447",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "search user by email",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Email is required"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Campaign": {
+                "title": "Campaign",
+                "description": "Class Campaign",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "inputs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Input"
+                        }
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                },
+                "type": "object"
+            },
+            "Input": {
+                "title": "Campaign",
+                "description": "Class Campaign",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "campaign_id": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "description": "channel,source,campaign_name,target_url",
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "Class User",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
